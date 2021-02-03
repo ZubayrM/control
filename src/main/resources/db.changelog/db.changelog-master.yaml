@@ -1,0 +1,118 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: zubayr
+      changes:
+        - createTable:
+            tableName: plans
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    prinmariKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+  - changeSet:
+      id: 2
+      author: zubayr
+      changes:
+        - createTable:
+            tableName: workers
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    prinmariKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(25)
+              - column:
+                  name: surname
+                  type: varchar(25)
+              - column:
+                  name: age
+                  type: int(3)
+              - column:
+                  name: profession
+                  type: enum("TURNER_WORKER", "MILLER_WORKER", "LOCKSMITH_WORKER", "CNC_OPERATOR")
+  - changeSet:
+      id: 3
+      author: zubayr
+      changes:
+        - createTable:
+            tableName: details
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    prinmariKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(25)
+              - column:
+                  name: designation
+                  type: varchar(25)
+              - column:
+                  name: product_id
+                  type: UUID
+
+  - changeSet:
+      id: 4
+      author: zubayr
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    prinmariKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(25)
+              - column:
+                  name: designation
+                  type: varchar(25)
+
+
+  - changeSet:
+      id: 5
+      author: zubayr
+      changes:
+        - createTable:
+            tableName: operation
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    prinmariKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: enum("TURNING_OPERATION", "MILLING_OPERATION", "LOCKSMITH_OPERATION", "PROCUREMENT_OPERATION", "GRINDING_OPERATION" )
+              - column:
+                  name: serial_number
+                  type: int(10)
+              - column:
+                  name: detail_id
+                  type: UUID
+              - column:
+                  name: time_in_minutes
+                  type: DOUBLE
+              - column:
+                  name: worker_id
+                  type: UUID
+              - column:
+                  name: stage
+                  type: enum("NOT_IN_OPERATION", "IN_WORK", "MADE", "PASSED",
