@@ -1,0 +1,107 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <property name="uuid_type" value="uuid" dbms="postgresql"/>
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="1" author="Zubayr">
+        <createTable tableName="plan">
+            <column name="id" type="uuid" >
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="date" type="DATE"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Zubayr">
+        <createTable tableName="worker">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR"/>
+            <column name="surname" type="VARCHAR"/>
+            <column name="date_of_birth" type="date"/>
+            <column name="profession" type="INTEGER"/> <!--ENUM-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Zubayr">
+        <createTable tableName="detail">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR"/>
+            <column name="designation" type="VARCHAR"/>
+            <column name="product_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Zubayr">
+        <createTable tableName="product">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR"/>
+            <column name="designation" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="Zubayr">
+        <createTable tableName="operation">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="INTEGER"/> <!--ENUM-->
+            <column name="serial_number" type="INT"/>
+            <column name="detail_id" type="uuid"/>
+            <column name="time_in_minutes" type="NUMERIC(19,6)"/>
+            <column name="worker_id" type="uuid"/>
+            <column name="stage" type="INTEGER"/> <!--ENUM-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="Zubayr">
+        <createTable tableName="plan2Detail">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="plan_id" type="uuid"/>
+            <column name="detail_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="Zubayr">
+        <addForeignKeyConstraint baseTableName="detail"
+                                 baseColumnNames="product_id"
+                                 constraintName="FK_detail_product"
+                                 referencedTableName="product"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="operation"
+                                 baseColumnNames="detail_id"
+                                 constraintName="FK_operation_derail"
+                                 referencedTableName="detail"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="operation"
+                                 baseColumnNames="worker_id"
+                                 constraintName="FK_operation_worker"
+                                 referencedTableName="worker"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="plan2Detail" baseColumnNames="plan_id"
+                                 constraintName="FK_plan2Detail_plan"
+                                 referencedTableName="plan"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="plan2Detail" baseColumnNames="detail_id"
+                                 constraintName="FK_plan2Detail_detail"
+                                 referencedTableName="detail"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>
