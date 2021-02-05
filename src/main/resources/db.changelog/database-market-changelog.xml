@@ -5,10 +5,12 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-    <property name="uuid_type" value="uuid" dbms="postgresql"/>
-    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
-
     <changeSet id="1" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="plan"/>
+            </not>
+        </preConditions>
         <createTable tableName="plan">
             <column name="id" type="uuid" >
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -20,6 +22,11 @@
     </changeSet>
 
     <changeSet id="2" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="worker"/>
+            </not>
+        </preConditions>
         <createTable tableName="worker">
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -32,6 +39,11 @@
     </changeSet>
 
     <changeSet id="3" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="detail"/>
+            </not>
+        </preConditions>
         <createTable tableName="detail">
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -46,6 +58,11 @@
     </changeSet>
 
     <changeSet id="4" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="product"/>
+            </not>
+        </preConditions>
         <createTable tableName="product">
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -56,6 +73,11 @@
     </changeSet>
 
     <changeSet id="5" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="operation"/>
+            </not>
+        </preConditions>
         <createTable tableName="operation">
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -69,35 +91,5 @@
             <column name="stage" type="INTEGER"/> <!--ENUM-->
         </createTable>
     </changeSet>
-
-    <changeSet id="6" author="Zubayr">
-        <createTable tableName="plan2Detail">
-            <column name="id" type="uuid">
-                <constraints nullable="false" unique="true" primaryKey="true"/>
-            </column>
-            <column name="plan_id" type="uuid"/>
-            <column name="detail_id" type="uuid"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="7" author="Zubayr">
-        <addForeignKeyConstraint baseTableName="detail"
-                                 baseColumnNames="product_id"
-                                 constraintName="FK_detail_product"
-                                 referencedTableName="product"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="operation"
-                                 baseColumnNames="detail_id"
-                                 constraintName="FK_operation_derail"
-                                 referencedTableName="detail"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="operation"
-                                 baseColumnNames="worker_id"
-                                 constraintName="FK_operation_worker"
-                                 referencedTableName="worker"
-                                 referencedColumnNames="id"/>
-    </changeSet>
-
-
 
 </databaseChangeLog>
