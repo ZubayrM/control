@@ -13,7 +13,9 @@
             <column name="id" type="uuid" >
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="date" type="DATE"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
+            <column name="real_end_date" type="DATE"/>
         </createTable>
     </changeSet>
 
@@ -36,7 +38,10 @@
             </column>
             <column name="name" type="VARCHAR"/>
             <column name="designation" type="VARCHAR"/>
+            <column name="route" type="VARCHAR"/>
+            <column name="material" type="VARCHAR"/>
             <column name="product_id" type="uuid"/>
+            <column name="stage" type="INTEGER"/> <!--ENUM-->
         </createTable>
     </changeSet>
 
@@ -57,6 +62,7 @@
             </column>
             <column name="name" type="INTEGER"/> <!--ENUM-->
             <column name="serial_number" type="INT"/>
+            <column name="serial_number_by_operation" type="INT"/>
             <column name="detail_id" type="uuid"/>
             <column name="time_in_minutes" type="NUMERIC(19,6)"/>
             <column name="worker_id" type="uuid"/>
@@ -90,16 +96,6 @@
                                  constraintName="FK_operation_worker"
                                  referencedTableName="worker"
                                  referencedColumnNames="id"/>
-
-        <addForeignKeyConstraint baseTableName="plan2Detail" baseColumnNames="plan_id"
-                                 constraintName="FK_plan2Detail_plan"
-                                 referencedTableName="plan"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="plan2Detail" baseColumnNames="detail_id"
-                                 constraintName="FK_plan2Detail_detail"
-                                 referencedTableName="detail"
-                                 referencedColumnNames="id"/>
-
     </changeSet>
 
 
