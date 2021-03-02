@@ -7,23 +7,21 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "employee")
-class Employee (
+data class Employee (
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: UUID,
+        @GeneratedValue(generator = "uuid")
+        val id: UUID? = null,
 
         @Column(name = "name")
-        val name: String,
+        val name: String? = null,
 
         @Column(name = "surname")
-        val surname: String,
+        val surname: String? = null,
 
         @Column(name = "date_of_birth")
-        val dataOfBirth: LocalDate,
+        //@Temporal(TemporalType.DATE)
+        val dataOfBirth: LocalDate? = null,
 
         @Column(name = "profession")
-        val profession: ProfessionEnum
-
-
-
+        val profession: ProfessionEnum? = null
 )

@@ -19,6 +19,16 @@
     <name>Control microservice</name>
     <description>control microservice</description>
 
+    <developers>
+        <developer>
+            <name>Denis</name>
+        </developer>
+        <developer>
+            <name>Zubayr</name>
+            <email>zubayr_@live.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <mapstruct.version>1.3.1.Final</mapstruct.version>
@@ -37,7 +47,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
@@ -174,6 +184,22 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 

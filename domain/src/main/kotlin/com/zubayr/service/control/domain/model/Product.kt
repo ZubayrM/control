@@ -5,15 +5,15 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "product")
-class Product (
+data class Product (
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: UUID,
+        @GeneratedValue(generator = "uuid")
+        val id: UUID? = null,
 
         @Column(name = "name")
-        val name: String,
+        val name: String? = null,
 
-        @Column(name = "description")
-        val designation: String
+        @Column(name = "cipher")
+        val cipher: String? = null
 )

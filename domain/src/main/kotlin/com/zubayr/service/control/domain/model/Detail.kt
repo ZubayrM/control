@@ -1,22 +1,27 @@
 package com.zubayr.service.control.domain.model
 
-import com.zubayr.service.control.domain.model.Enum.StageEnum
+import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
+import kotlin.collections.ArrayList
 
 @Entity
 @Table(name = "detail")
 data class Detail (
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(generator = "uuid")
         val id: UUID? = null,
 
         @Column(name = "name")
         val name: String? = null,
 
-        @Column(name = "designation")
-        val designation: String? = null,
+        @Column(name = "cipher")
+        val cipher: String? = null,
+
+        @ManyToOne
+        @JoinColumn (name = "product_id")
+        val product: Product? = null,
 
         @Column(name = "route")
         val route: String? = null,
@@ -24,19 +29,14 @@ data class Detail (
         @Column(name = "material")
         val material: String? = null,
 
+        @Column(name = "full_time_created")
+        val fullTimeCreated: BigDecimal? = null,
+
+        @OneToMany
+        val operations: List<InfoOperation>? = ArrayList(),
+
         @ManyToOne
-        @Column (name = "product_id")
-        val product: Product? = null,
-
-        @Column(name = "stage")
-        val stage: StageEnum? = null,
-
-        @OneToMany(
-                mappedBy = "detail",
-                fetch = FetchType.LAZY
-        )
-        val operations: List<Operation>? = null
-
-
+        @JoinColumn(name ="plan_id")
+        val plan: Plan? = null
 
 )
