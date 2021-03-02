@@ -49,11 +49,12 @@
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR"/>
-            <column name="designation" type="VARCHAR"/>
+            <column name="cipher" type="VARCHAR"/>
+            <column name="product_id" type="uuid"/>
             <column name="route" type="VARCHAR"/>
             <column name="material" type="VARCHAR"/>
-            <column name="product_id" type="uuid"/>
-            <column name="stage" type="INTEGER"/> <!--ENUM-->
+            <column name="full_time_created" type="NUMERIC(19,6)"/>
+            <column name="plan_id" type="uuid"/>
         </createTable>
     </changeSet>
 
@@ -68,7 +69,9 @@
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR"/>
-            <column name="designation" type="VARCHAR"/>
+            <column name="cipher" type="VARCHAR">
+                <constraints unique="true"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -87,8 +90,22 @@
             <column name="serial_number_by_operation" type="INT"/>
             <column name="detail_id" type="uuid"/>
             <column name="time_in_hours" type="NUMERIC(19,6)"/>
-            <column name="employee_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="Zubayr">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="info_operation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="info_operation">
+            <column name="id" type="uuid">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="operation" type="uuid"/>
             <column name="stage" type="INTEGER"/> <!--ENUM-->
+            <column name="employee_id" type="uuid"/>
         </createTable>
     </changeSet>
 

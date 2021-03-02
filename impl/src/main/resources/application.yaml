@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ololo
+    url: jdbc:postgresql://localhost:5432/control
     username: postgres
     password: postgres
     hikari:
@@ -29,3 +29,5 @@ spring:
         jdbc:
           batch-size: 32
     open-in-view: false
+
+local.path: "classpath:data"

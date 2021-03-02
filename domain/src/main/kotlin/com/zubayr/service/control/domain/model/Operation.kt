@@ -1,44 +1,28 @@
 package com.zubayr.service.control.domain.model
 
-import com.zubayr.service.control.domain.model.Enum.StageOfOperation
-import java.time.LocalDate
+import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "operation")
-class Operation (
-
+data class Operation (
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: UUID,
+        @GeneratedValue(generator = "uuid")
+        val id: UUID? = null,
 
         @Column(name = "name")
-        val name: String,
+        val name: String? = null,
 
         @Column(name = "serial_number")
-        val serialNumber: Int,
+        val serialNumber: Int? = null,
 
         @Column(name = "serial_number_by_operation")
-        val serialNumberByOperation: Int,
+        val serialNumberByOperation: Int? = null,
 
-        @ManyToOne
-        @JoinColumn(name = "detail_id")
-        val detail: Detail,
+        @Column(name = "cipher_of_detail")
+        val detail: String? = null,
 
         @Column(name = "time_in_hours")
-        val time_in_hours: LocalDate,
-
-        @ManyToOne
-        @JoinColumn(name = "employee_id")
-        val employee: Employee,
-
-        @Column(name = "stage")
-        val stage: StageOfOperation
-
-
-
-
-
-
+        val time_in_hours: BigDecimal? = null
 )

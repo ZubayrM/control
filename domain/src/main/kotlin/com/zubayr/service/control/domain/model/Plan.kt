@@ -3,31 +3,34 @@ package com.zubayr.service.control.domain.model
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
+import kotlin.collections.ArrayList
 
 @Entity
 @Table(name = "plan")
-class Plan (
+data class Plan(
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+        @GeneratedValue(generator = "uuid")
         @Column(name = "id")
-        val id: UUID,
+    val id: UUID? = null,
 
-        @Column(name = "start_date")
-        val startDate: LocalDate,
+    @Column(name = "start_date")
+        //@Temporal(TemporalType.DATE)
+    val startDate: LocalDate? = null,
 
-        @Column(name = "end_date")
-        val endDate: LocalDate,
+    @Column(name = "end_date")
+        //@Temporal(TemporalType.DATE)
+    val endDate: LocalDate? = null,
 
-        @Column(name = "real_end_date")
-        val realEndDate: LocalDate,
+    @Column(name = "real_end_date")
+        //@Temporal(TemporalType.DATE)
+    val realEndDate: LocalDate? = null
 
-        @OneToMany(
-                mappedBy = "plan",
-                fetch = FetchType.LAZY
-        )
-        val details: List<Detail> = emptyList()
-
+//        @OneToMany(
+//                mappedBy = "plan",
+//                fetch = FetchType.LAZY
+//        )
+//        val details: List<Detail>? = ArrayList()
 )
 
 

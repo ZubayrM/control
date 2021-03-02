@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/details
+    url: jdbc:postgresql://localhost:5432/control?createDatabaseIfNotExist=true
     username: postgres
     password: postgres
     hikari:
@@ -13,7 +13,7 @@ spring:
 
   liquibase:
     enabled: true
-    drop-first: true
+    drop-first: false
     change-log: classpath:db.changelog/database-market-changelog.xml
 
   jpa:
@@ -29,3 +29,5 @@ spring:
         jdbc:
           batch-size: 32
     open-in-view: false
+
+local.path:  classpath:data.xlsx

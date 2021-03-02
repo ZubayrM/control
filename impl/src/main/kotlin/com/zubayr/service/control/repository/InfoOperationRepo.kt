@@ -1,10 +1,10 @@
 package com.zubayr.service.control.repository
 
-import com.zubayr.service.control.domain.model.Operation
+import com.zubayr.service.control.domain.model.InfoOperation
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface OperationRepo: PagingAndSortingRepository<Operation, UUID> {
+interface InfoOperationRepo: PagingAndSortingRepository<InfoOperation, UUID> {
 }
