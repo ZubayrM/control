@@ -1,15 +1,13 @@
 package com.zubayr.service.control.api.model
 
-import java.util.*
-
+import com.zubayr.service.control.domain.model.Enum.StageEnum
 
 data class DetailDto(
-        val id: UUID? = null,
-        val name: String? = null,
-        val cipher: String? = null,
-        val route: String? = null,
-        val material: String? = null
-//        val product: ProductDto? = null,
-//        val stage: StageEnum? = null,
-//        val operations: List<OperationDto>? = null
-)
+        var name: String? = null,
+        var cipher: String? = null,
+        var route: String? = null,
+        var material: String? = null,
+        var product: ProductDto? = null,
+        var stage: StageEnum? = null,
+        var operations: List<OperationDto>? = null
+) : BaseDto()

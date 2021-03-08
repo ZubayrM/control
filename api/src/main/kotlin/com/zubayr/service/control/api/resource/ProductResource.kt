@@ -9,8 +9,8 @@ import java.util.*
 @RequestMapping("/product")
 interface ProductResource {
 
-    @GetMapping("/byName")
-    fun geByName(@RequestParam name: String): ResponseEntity<ProductDto>
+    @GetMapping("/{id}")
+    fun geById(@PathVariable id: UUID): ResponseEntity<ProductDto>
 
     @GetMapping("/cipher")
     fun getByCipher(@RequestParam cipher: String): ResponseEntity<ProductDto>

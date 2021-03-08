@@ -1,9 +1,7 @@
 package com.zubayr.service.control.api.model
 
-import java.util.*
-
-data class ProductDto (
-        val id: UUID? = null,
-        val name: String? = null,
-        val cipher: String? = null
-)
+data class ProductDto(
+        var name: String? = null,
+        var cipher: String? = null,
+        var details: List<DetailDto>? = null
+) : BaseDto()

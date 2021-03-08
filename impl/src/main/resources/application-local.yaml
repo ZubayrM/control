@@ -1,9 +1,9 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/control?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/control
     username: postgres
     password: postgres
     hikari:
@@ -12,7 +12,7 @@ spring:
       maximum-pool-size: 15
 
   liquibase:
-    enabled: true
+    enabled: false
     drop-first: false
     change-log: classpath:db.changelog/database-market-changelog.xml
 
@@ -31,3 +31,7 @@ spring:
     open-in-view: false
 
 local.path:  classpath:data.xlsx
+
+control:
+  redurants: [на, Приказ, изделие, изделия]
+  matcher: (\№\d*|^\(.*|.*\)$)

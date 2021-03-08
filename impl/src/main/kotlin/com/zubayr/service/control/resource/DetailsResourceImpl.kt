@@ -1,29 +1,31 @@
 package com.zubayr.service.control.resource
 
-import com.zubayr.service.control.api.model.detail.ListDetailDto
 import com.zubayr.service.control.api.model.DetailDto
+import com.zubayr.service.control.api.model.detail.ListDetailDto
+import com.zubayr.service.control.api.model.detail.ProductAndListDetailDto
 import com.zubayr.service.control.api.resource.DetailsResource
-import com.zubayr.service.control.repository.DetailRepo
+import com.zubayr.service.control.mapper.DetailMapper
+import com.zubayr.service.control.repository.DetailRepository
 import com.zubayr.service.control.service.DetailService
+import org.mapstruct.factory.Mappers
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 class DetailsResourceImpl(
-        private val detailRepo: DetailRepo,
+        private val detailRepository: DetailRepository,
         private val detailService: DetailService
 ): DetailsResource {
 
-    //private final val converter: DetailConverter = Mappers.getMapper(DetailConverter::class.java)
-
+    private final val detailMapper: DetailMapper = Mappers.getMapper(DetailMapper::class.java)
 
     override fun getById(id: UUID): ResponseEntity<DetailDto> {
         val responseEntity = ResponseEntity.ok().header("Access-Control-Allow-Origin", "*")
-        val converter = com.zubayr.service.control.mapper.temporary.DetailConverter()
-
-        return  responseEntity.body(converter.toDto(detailRepo.findById(id).orElseThrow()))
+        return  responseEntity.body(detailMapper.convertToDto(detailRepository.findById(id).orElseThrow()))
     }
 
     override fun getByCipher(cipher: String): ResponseEntity<DetailDto> {
@@ -31,9 +33,8 @@ class DetailsResourceImpl(
     }
 
     override fun getByName(name: String): ResponseEntity<ArrayList<ListDetailDto>> {
-        val responseEntity = ResponseEntity.ok().header("Access-Control-Allow-Origin", "http://localhost:3000")
         val byName = detailService.getByName(name)
-        return responseEntity.body(byName)
+        return ResponseEntity.ok(byName)
     }
 
     override fun getByEmployee(id: UUID): ResponseEntity<List<DetailDto>> {
@@ -44,14 +45,13 @@ class DetailsResourceImpl(
         TODO("Not yet implemented")
     }
 
-    override fun getAllByPlan(id: UUID): ResponseEntity<List<DetailDto>> {
-        TODO("Not yet implemented")
+    override fun getAllByPlan(id: UUID): ResponseEntity<List<ProductAndListDetailDto>> {
+        return ResponseEntity.ok(detailService.getAllByPlan(id))
     }
 
     override fun add(dto: DetailDto): ResponseEntity<DetailDto> {
 
-        val converter = com.zubayr.service.control.mapper.temporary.DetailConverter()
-        return ResponseEntity.ok(converter.toDto(detailRepo.save(converter.toModel(dto))))
+        return ResponseEntity.ok(detailMapper.convertToDto(detailRepository.save(detailMapper.convertToEntity(dto))))
 
 //        val converter: DetailConverter = Mappers.getMapper(DetailConverter::class.java)
 //        val result = converter.convertToDto(detailRepo.save(converter.convertToModel(dto)))

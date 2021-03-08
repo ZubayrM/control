@@ -8,20 +8,17 @@ import javax.persistence.*
 @Entity
 @Table(name = "employee")
 data class Employee (
-        @Id
-        @GeneratedValue(generator = "uuid")
-        val id: UUID? = null,
 
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
 
         @Column(name = "surname")
-        val surname: String? = null,
+        var surname: String? = null,
 
         @Column(name = "date_of_birth")
         //@Temporal(TemporalType.DATE)
-        val dataOfBirth: LocalDate? = null,
+        var dataOfBirth: LocalDate? = null,
 
         @Column(name = "profession")
-        val profession: ProfessionEnum? = null
-)
+        var profession: ProfessionEnum? = null
+) : BaseEntity()

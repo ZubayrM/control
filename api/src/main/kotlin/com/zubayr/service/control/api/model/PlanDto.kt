@@ -1,11 +1,8 @@
 package com.zubayr.service.control.api.model
 
-import java.util.*
-
-data class PlanDto (
-        val id: UUID? = null,
-        val startDate: String? = null,
-        val endDate: String? = null,
-        val realEndDate: String? = null
-
-)
+data class PlanDto(
+        var startDate: String? = null,
+        var endDate: String? = null,
+        var realEndDate: String? = null,
+        var products: List<ProductDto>? = null
+) : BaseDto()

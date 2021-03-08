@@ -9,34 +9,25 @@ import kotlin.collections.ArrayList
 @Table(name = "detail")
 data class Detail (
 
-        @Id
-        @GeneratedValue(generator = "uuid")
-        val id: UUID? = null,
-
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
 
         @Column(name = "cipher")
-        val cipher: String? = null,
+        var cipher: String? = null,
 
-        @ManyToOne
-        @JoinColumn (name = "product_id")
-        val product: Product? = null,
+        @Column(name = "product_id")
+        var productId: UUID? = null,
 
         @Column(name = "route")
-        val route: String? = null,
+        var route: String? = null,
 
         @Column(name = "material")
-        val material: String? = null,
+        var material: String? = null,
 
         @Column(name = "full_time_created")
-        val fullTimeCreated: BigDecimal? = null,
+        var fullTimeCreated: BigDecimal? = null,
 
-        @OneToMany
-        val operations: List<InfoOperation>? = ArrayList(),
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "detail", fetch = FetchType.LAZY)
+        var infoOperations: List<InfoOperation>? = null
 
-        @ManyToOne
-        @JoinColumn(name ="plan_id")
-        val plan: Plan? = null
-
-)
+) : BaseEntity()

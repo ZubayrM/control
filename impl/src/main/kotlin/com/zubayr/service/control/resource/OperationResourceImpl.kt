@@ -3,9 +3,10 @@ package com.zubayr.service.control.resource
 import com.zubayr.service.control.api.model.OperationDto
 import com.zubayr.service.control.api.resource.OperationResource
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
-
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 class OperationResourceImpl: OperationResource {
     override fun getByDetail(cipher: String): ResponseEntity<List<OperationDto>> {

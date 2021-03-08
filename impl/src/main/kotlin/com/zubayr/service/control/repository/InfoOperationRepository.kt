@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface InfoOperationRepo: PagingAndSortingRepository<InfoOperation, UUID> {
+interface InfoOperationRepository: PagingAndSortingRepository<InfoOperation, UUID> {
 }

@@ -8,19 +8,20 @@ import javax.persistence.*
 @Table(name = "info_operation")
 data class InfoOperation(
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    val id: UUID? = null,
-
     @ManyToOne
     @JoinColumn(name = "operation_id")
-    val operation: Operation? = null,
+    var operation: Operation? = null,
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "stage")
-    val stage: StageOfOperationEnum? = StageOfOperationEnum.NOT_DONE,
+    var stage: StageOfOperationEnum? = StageOfOperationEnum.NOT_DONE,
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    val employee: Employee? = null
-)
+    var employee: Employee? = null,
+
+    @ManyToOne
+    @JoinColumn(name = "detail_id")
+    var detail: Detail? = null
+
+) : BaseEntity()

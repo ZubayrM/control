@@ -14,6 +14,9 @@ interface PlanResource {
     @GetMapping("/byDate")
     fun getByDate(@RequestParam date: String): ResponseEntity<PlanDto>
 
+    @GetMapping()
+    fun getAll(): ResponseEntity<List<PlanDto>>
+
     @PostMapping
     fun add(@RequestBody dto: PlanDto): ResponseEntity<PlanDto>
 

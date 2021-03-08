@@ -2,6 +2,7 @@ package com.zubayr.service.control.api.resource
 
 import com.zubayr.service.control.api.model.detail.ListDetailDto
 import com.zubayr.service.control.api.model.DetailDto
+import com.zubayr.service.control.api.model.detail.ProductAndListDetailDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -26,7 +27,7 @@ interface DetailsResource {
     fun getByProduct(@PathVariable id: UUID): ResponseEntity<List<DetailDto>>
 
     @GetMapping("/byPlan/{id}")
-    fun getAllByPlan(@PathVariable id: UUID): ResponseEntity<List<DetailDto>>
+    fun getAllByPlan(@PathVariable id: UUID): ResponseEntity<List<ProductAndListDetailDto>>
 
     @PostMapping
     fun add(@RequestBody dto: DetailDto): ResponseEntity<DetailDto>

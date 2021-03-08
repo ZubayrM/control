@@ -7,22 +7,20 @@ import javax.persistence.*
 @Entity
 @Table(name = "operation")
 data class Operation (
-        @Id
-        @GeneratedValue(generator = "uuid")
-        val id: UUID? = null,
 
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
 
         @Column(name = "serial_number")
-        val serialNumber: Int? = null,
+        var serialNumber: Int? = null,
 
         @Column(name = "serial_number_by_operation")
-        val serialNumberByOperation: Int? = null,
+        var serialNumberByOperation: Int? = null,
 
-        @Column(name = "cipher_of_detail")
-        val detail: String? = null,
+        @Column(name = "cipher_detail")
+        var cipherDetail: UUID? = null,
 
         @Column(name = "time_in_hours")
-        val time_in_hours: BigDecimal? = null
-)
+        var time_in_hours: BigDecimal? = null
+
+) : BaseEntity()

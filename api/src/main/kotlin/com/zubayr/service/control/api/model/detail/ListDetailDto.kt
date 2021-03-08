@@ -2,10 +2,8 @@ package com.zubayr.service.control.api.model.detail
 
 import com.zubayr.service.control.api.model.DetailDto
 
-data class ListDetailDto (
-    val name: String? = null,
-    val cipher: String? = null,
-    val list: List<DetailDto> = ArrayList()
-
-
-        )
+data class ListDetailDto(
+        var name: String? = null,
+        var cipher: String? = null,
+        var list: List<DetailDto> = ArrayList()
+)

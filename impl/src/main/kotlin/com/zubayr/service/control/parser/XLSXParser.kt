@@ -3,27 +3,28 @@ package com.zubayr.service.control.parser
 import com.zubayr.service.control.domain.model.Detail
 import com.zubayr.service.control.domain.model.Plan
 import com.zubayr.service.control.domain.model.Product
-import com.zubayr.service.control.repository.PlanRepo
-import com.zubayr.service.control.repository.ProductRepo
+import com.zubayr.service.control.repository.PlanRepository
+import com.zubayr.service.control.repository.ProductRepository
 import java.io.File
 import java.io.FileInputStream
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 @Component
+@ConfigurationProperties(prefix = "control", ignoreUnknownFields = false)
 class XLSXParser(
-    private val productRepo: ProductRepo,
-    private val planRepo: PlanRepo) {
+        private val productRepository: ProductRepository,
+        private val planRepository: PlanRepository) {
 
-
+    var redurants: List<String> = mutableListOf()
+    var matcher:String = String()
     val month = "(январь|февраль|март|апрель|май|июнь|июль|август|сентябрь|октябрь|ноябрь|декабрь)"
 
 
@@ -64,21 +65,25 @@ class XLSXParser(
                     val localDate = dataFormatter.parse(value)
                     val startDate = LocalDate.from(localDate.toInstant().atZone(ZoneId.systemDefault()))
                      val plan = Plan(startDate = startDate)
-                    savePlan = planRepo.save(plan)
+                    savePlan = planRepository.save(plan)
                 }
 
             }
 
             else if (cell0 != null && cell0.toString() != "" ) {
-
-
                 if ((cell1 == null || cell1.toString() == "")) {
                     productName = cell0.toString()
+
+                    val split = productName.trim().split(" ")
+                        .filter { redurants.contains(it).not() }
+                        .filter { it.matches(Regex(matcher)).not() }
+
                     newProduct = Product(
-                        name = productName.substring(0, productName.length - 1).trim(),
-                        cipher = productName.trimEnd()
+                        cipher = split.last(),
+                        name = split.dropLast(1).reduce {s1,s2-> "$s1 $s2"},
+                        plan = savePlan
                     )
-                    newProduct = productRepo.save(newProduct)
+                    newProduct = productRepository.save(newProduct)
                 }
 
                 if (cell4 != null && cell4.toString() != "" ) {
@@ -88,11 +93,10 @@ class XLSXParser(
                                 Detail(
                                     cipher = row.getCell(0).toString(),
                                     name = row.getCell(1).toString(),
-                                    product = newProduct,
+                                    productId = newProduct?.id,
                                     route = row.getCell(2).toString(),
                                     material = row.getCell(3).toString(),
-                                    fullTimeCreated = row.getCell(5).toString().replace(",", ".").toBigDecimal(),
-                                    plan = savePlan
+                                    fullTimeCreated = row.getCell(5).toString().replace(",", ".").toBigDecimal()
                                 )
                             )
                             println(row.getCell(0))

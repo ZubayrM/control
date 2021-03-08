@@ -2,35 +2,29 @@ package com.zubayr.service.control.resource
 
 import com.zubayr.service.control.api.model.PlanDto
 import com.zubayr.service.control.api.resource.PlanResource
-import com.zubayr.service.control.domain.model.Plan
-import com.zubayr.service.control.mapper.temporary.PlanConverter
-import com.zubayr.service.control.repository.PlanRepo
+import com.zubayr.service.control.service.PlanService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
-class PlanResourceImpl(private val planRepo: PlanRepo): PlanResource {
-    override fun getById(id: UUID): ResponseEntity<PlanDto> {
-        val result = planRepo.findById(id).get()
-        return ResponseEntity.ok(PlanDto(result.id, result.startDate.toString(), result.endDate.toString(), result.realEndDate.toString()))
-    }
+class PlanResourceImpl(
+        private val planService: PlanService
+) : PlanResource {
 
-    override fun getByDate(date: String): ResponseEntity<PlanDto> {
-        TODO("Not yet implemented")
-    }
+    override fun getById(id: UUID): ResponseEntity<PlanDto> = ResponseEntity.ok().body(planService.getById(id))
 
-    override fun add(dto: PlanDto): ResponseEntity<PlanDto> {
-        val converter = PlanConverter()
-        val save = planRepo.save(converter.toModel(dto))
-        return ResponseEntity.ok(converter.toDto(save))
+    override fun getAll(): ResponseEntity<List<PlanDto>> = ResponseEntity.ok(planService.getAll())
 
-    }
+    override fun getByDate(date: String) = ResponseEntity.ok().body(planService.getByDate(date))
+
+    override fun add(dto: PlanDto) = ResponseEntity.ok(planService.add(dto))
 
     override fun put(dto: PlanDto): ResponseEntity<PlanDto> {
         TODO("Not yet implemented")
     }
-
     override fun delete(id: UUID): ResponseEntity<PlanDto> {
         TODO("Not yet implemented")
     }

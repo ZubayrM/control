@@ -7,13 +7,14 @@ import javax.persistence.*
 @Table(name = "product")
 data class Product (
 
-        @Id
-        @GeneratedValue(generator = "uuid")
-        val id: UUID? = null,
-
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
 
         @Column(name = "cipher")
-        val cipher: String? = null
-)
+        var cipher: String? = null,
+
+        @ManyToOne
+        @JoinColumn(name ="plan_id")
+        val plan: Plan? = null
+
+) : BaseEntity()
