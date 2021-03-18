@@ -61,6 +61,7 @@
             <column name="cipher" type="VARCHAR"/>
             <column name="product_id" type="uuid"/>
             <column name="route" type="VARCHAR"/>
+            <column name="stage" type="INTEGER"/>
             <column name="material" type="VARCHAR"/>
             <column name="full_time_created" type="NUMERIC(19,6)"/>
             <column name="start_date" type="DATE"/>

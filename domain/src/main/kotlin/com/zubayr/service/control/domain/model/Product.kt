@@ -1,6 +1,5 @@
 package com.zubayr.service.control.domain.model
 
-import java.util.*
 import javax.persistence.*
 
 @Entity

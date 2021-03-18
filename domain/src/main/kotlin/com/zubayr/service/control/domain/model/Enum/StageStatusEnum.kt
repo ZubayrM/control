@@ -1,6 +1,6 @@
 package com.zubayr.service.control.domain.model.Enum
 
-enum class StageOfOperationEnum {
+enum class StageStatusEnum {
 
     COMPLETED ,
 

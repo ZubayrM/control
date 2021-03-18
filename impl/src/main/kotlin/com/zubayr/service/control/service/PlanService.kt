@@ -2,6 +2,7 @@ package com.zubayr.service.control.service
 
 import com.zubayr.service.control.api.model.PlanDto
 import com.zubayr.service.control.mapper.PlanMapper
+import com.zubayr.service.control.repository.DetailRepository
 import com.zubayr.service.control.repository.PlanRepository
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
