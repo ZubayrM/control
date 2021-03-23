@@ -1,7 +1,6 @@
 package com.zubayr.service.control.service
 
 import com.zubayr.service.control.api.model.DetailsStatusDto
-import com.zubayr.service.control.domain.model.Enum.StageEnum
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import com.zubayr.service.control.mapper.DetailMapper
 import com.zubayr.service.control.repository.DetailRepository
@@ -19,8 +18,8 @@ class DetailService(
     fun getById(id: UUID) = detailRepository.getById(id).let { detailMapper.convertToDto(it) }
 
     fun getStatusByProductId(id: UUID) = DetailsStatusDto(
-            completeDetails = detailRepository.countDetailByProductIdAndAndStage(id, StageStatusEnum.COMPLETED),
-            notDoneDetails = detailRepository.countDetailByProductIdAndAndStage(id, StageStatusEnum.NOT_DONE)
+            completeDetails = detailRepository.countDetailByProductIdAndStage(id, StageStatusEnum.COMPLETED),
+            notDoneDetails = detailRepository.countDetailByProductIdAndStage(id, StageStatusEnum.NOT_DONE)
     )
 
 }

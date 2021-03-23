@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 import java.util.*
+import javax.crypto.Cipher
 
 @Repository
 interface DetailRepository: PagingAndSortingRepository<Detail, UUID> {
@@ -18,7 +19,9 @@ interface DetailRepository: PagingAndSortingRepository<Detail, UUID> {
 
     fun getAllByProductId(productId: UUID): List<Detail>
 
-    fun countDetailByProductIdAndAndStage(productId: UUID, stage: StageStatusEnum): Long
+    fun countDetailByProductIdAndStage(productId: UUID, stage: StageStatusEnum): Long
+
+    fun getTopByProductIdAndCipherAndStage(count: Int,productId: UUID, cipher: String, stage: StageStatusEnum): List<Detail>
 
 
 

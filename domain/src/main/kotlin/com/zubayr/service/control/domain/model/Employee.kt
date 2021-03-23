@@ -20,5 +20,10 @@ data class Employee (
         var dataOfBirth: LocalDate? = null,
 
         @Column(name = "profession")
-        var profession: ProfessionEnum? = null
+        var profession: ProfessionEnum? = null,
+
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "employee", fetch = FetchType.LAZY)
+        var infoOperations: MutableList<InfoOperation>? = null
+
+
 ) : BaseEntity()

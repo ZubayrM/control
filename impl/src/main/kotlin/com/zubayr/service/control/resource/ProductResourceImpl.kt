@@ -16,7 +16,6 @@ class ProductResourceImpl(
 
     override fun geById(id: UUID): ResponseEntity<ProductDto> = ResponseEntity.ok().body(productService.getById(id))
 
-
     override fun getByCipher(cipher: String): ResponseEntity<ProductDto> {
         TODO("Not yet implemented")
     }

@@ -32,6 +32,6 @@ data class Detail (
         var stage: StageStatusEnum? = StageStatusEnum.NOT_DONE,
 
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "detail", fetch = FetchType.LAZY)
-        var infoOperations: List<InfoOperation>? = null
+        var infoOperations: MutableList<InfoOperation>? = null
 
 ) : BaseEntity()

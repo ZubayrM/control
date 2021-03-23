@@ -7,4 +7,5 @@ import java.util.*
 
 @Repository
 interface EmployeeRepository: PagingAndSortingRepository<Employee, UUID> {
+    fun getById(employeeId: UUID): Employee
 }

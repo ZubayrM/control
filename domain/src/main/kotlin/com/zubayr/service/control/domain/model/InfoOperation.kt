@@ -7,19 +7,19 @@ import javax.persistence.*
 @Table(name = "info_operation")
 data class InfoOperation(
 
-        @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "operation_id")
     var operation: Operation? = null,
 
-        @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "stage")
     var stage: StageStatusEnum? = StageStatusEnum.NOT_DONE,
 
-        @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     var employee: Employee? = null,
 
-        @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "detail_id")
     var detail: Detail? = null
 

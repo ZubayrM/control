@@ -1,27 +1,17 @@
 package com.zubayr.service.control.resource
 
-import com.zubayr.service.control.api.model.OperationDto
+import com.zubayr.service.control.api.model.SetupOperationDto
 import com.zubayr.service.control.api.resource.OperationResource
-import org.springframework.http.ResponseEntity
+import com.zubayr.service.control.service.InfoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
+
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
-class OperationResourceImpl: OperationResource {
-    override fun getByDetail(cipher: String): ResponseEntity<List<OperationDto>> {
-        TODO("Not yet implemented")
-    }
+class OperationResourceImpl(
+        private val infoService: InfoService
+) : OperationResource {
 
-    override fun add(dto: OperationDto): ResponseEntity<OperationDto> {
-        TODO("Not yet implemented")
-    }
+    override fun add(infoDto: SetupOperationDto) = infoService.add(infoDto)
 
-    override fun put(dto: OperationDto): ResponseEntity<OperationDto> {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(id: UUID): ResponseEntity<Boolean> {
-        TODO("Not yet implemented")
-    }
 }

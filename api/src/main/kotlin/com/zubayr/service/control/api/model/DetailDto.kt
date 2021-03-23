@@ -7,12 +7,14 @@ data class DetailDto(
         var material: String? = null,
         var product: ProductDto? = null,
         var stage: StageDetailEnumDto? = null,
-        var operations: List<OperationDto>? = null
+        var operationInfos: List<OperationInfoDto>? = null
 ) : BaseDto()
 
 enum class StageDetailEnumDto {
 
     COMPLETED,
+
+    IN_WORK,
 
     NOT_DONE
 }
