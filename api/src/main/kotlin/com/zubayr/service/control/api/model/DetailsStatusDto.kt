@@ -10,5 +10,6 @@ import java.util.*
  */
 data class DetailsStatusDto (
         var completeDetails: Long? = null,
+        var inWorkDetails: Long? = null,
         var notDoneDetails: Long? = null
 )

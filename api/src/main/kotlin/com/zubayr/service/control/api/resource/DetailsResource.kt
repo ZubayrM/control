@@ -1,13 +1,11 @@
 package com.zubayr.service.control.api.resource
 
-import com.zubayr.service.control.api.model.detail.ListDetailDto
 import com.zubayr.service.control.api.model.DetailDto
 import com.zubayr.service.control.api.model.DetailsStatusDto
-import com.zubayr.service.control.api.model.PlanDto
-import com.zubayr.service.control.api.model.detail.ProductAndListDetailDto
+import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.multipart.MultipartFile
+
 import java.util.*
 
 @RequestMapping("/detail")
@@ -17,7 +15,12 @@ interface DetailsResource {
     fun getById(@PathVariable id:UUID): ResponseEntity<DetailDto>
 
     @GetMapping("/product/{id}")
+    fun getAllByProductId(@PathVariable id:UUID): ResponseEntity<List<DetailDto>>
+
+    @GetMapping("/productStatus/{id}")
     fun getStatusByProductId(@PathVariable id:UUID): ResponseEntity<DetailsStatusDto>
+
+
 
 
 //    @GetMapping("/{id}")

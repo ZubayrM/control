@@ -14,6 +14,7 @@ interface DetailRepository : PagingAndSortingRepository<Detail, UUID> {
 
     fun getById(id: UUID): Detail
 
+    @Query("select * from detail where product_id = :productId and is_deleted = false", nativeQuery = true)
     fun getAllByProductId(productId: UUID): List<Detail>
 
     fun countDetailByProductIdAndStage(productId: UUID, stage: StageStatusEnum): Long
