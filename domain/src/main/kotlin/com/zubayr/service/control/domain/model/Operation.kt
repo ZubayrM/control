@@ -18,9 +18,12 @@ data class Operation (
         var serialNumberByOperation: Int? = null,
 
         @Column(name = "cipher_detail")
-        var cipherDetail: UUID? = null,
+        var cipherDetail: String? = null,
 
         @Column(name = "time_in_hours")
-        var time_in_hours: BigDecimal? = null
+        var time_in_hours: BigDecimal? = null,
+
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "operation")
+        var infoOperations: MutableList<InfoOperation>? = mutableListOf()
 
 ) : BaseEntity()

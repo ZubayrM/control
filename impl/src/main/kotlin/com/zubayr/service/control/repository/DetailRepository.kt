@@ -1,17 +1,14 @@
 package com.zubayr.service.control.repository
 
-import com.zubayr.service.control.api.model.DetailsStatusDto
 import com.zubayr.service.control.domain.model.Detail
-import com.zubayr.service.control.domain.model.Enum.StageEnum
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 import java.util.*
-import javax.crypto.Cipher
 
 @Repository
-interface DetailRepository: PagingAndSortingRepository<Detail, UUID> {
+interface DetailRepository : PagingAndSortingRepository<Detail, UUID> {
 
     fun findByName(name: String): List<Detail>
 
@@ -21,8 +18,8 @@ interface DetailRepository: PagingAndSortingRepository<Detail, UUID> {
 
     fun countDetailByProductIdAndStage(productId: UUID, stage: StageStatusEnum): Long
 
-    fun getTopByProductIdAndCipherAndStage(count: Int,productId: UUID, cipher: String, stage: StageStatusEnum): List<Detail>
-
+    @Query("select * from detail where is_deleted = false and product_id = :productId and cipher = :cipher and stage = :stage ", nativeQuery = true)
+    fun getByProductIdAndCipherAndStage(productId: UUID, cipher:String, stage: Int): List<Detail>
 
 
 }

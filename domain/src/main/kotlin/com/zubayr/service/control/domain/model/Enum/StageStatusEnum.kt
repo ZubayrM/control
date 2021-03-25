@@ -2,11 +2,9 @@ package com.zubayr.service.control.domain.model.Enum
 
 enum class StageStatusEnum {
 
-    COMPLETED,
+    NOT_DONE,
 
     IN_WORK,
 
-    NOT_DONE
-
-
+    COMPLETED
 }

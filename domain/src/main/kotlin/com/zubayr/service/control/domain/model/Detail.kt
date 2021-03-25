@@ -2,6 +2,7 @@ package com.zubayr.service.control.domain.model
 
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import java.math.BigDecimal
+import java.time.ZonedDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -18,6 +19,12 @@ data class Detail (
         @Column(name = "product_id")
         var productId: UUID? = null,
 
+        @Column(name = "start_time")
+        var startTime: ZonedDateTime? = null,
+
+        @Column(name = "end_time")
+        var endTime: ZonedDateTime? = null,
+
         @Column(name = "route")
         var route: String? = null,
 
@@ -31,7 +38,7 @@ data class Detail (
         @Column(name = "stage")
         var stage: StageStatusEnum? = StageStatusEnum.NOT_DONE,
 
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "detail", fetch = FetchType.LAZY)
-        var infoOperations: MutableList<InfoOperation>? = null
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "detail")
+        var infoOperations: MutableList<InfoOperation>? = mutableListOf()
 
 ) : BaseEntity()

@@ -12,10 +12,10 @@ data class DetailDto(
 
 enum class StageDetailEnumDto {
 
-    COMPLETED,
+    NOT_DONE,
 
     IN_WORK,
 
-    NOT_DONE
+    COMPLETED
 }
 

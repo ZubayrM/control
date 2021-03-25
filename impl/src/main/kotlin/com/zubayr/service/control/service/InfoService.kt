@@ -1,17 +1,15 @@
 package com.zubayr.service.control.service
 
-import com.zubayr.service.control.api.model.OperationInfoDto
 import com.zubayr.service.control.api.model.SetupOperationDto
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import com.zubayr.service.control.domain.model.InfoOperation
-import com.zubayr.service.control.mapper.DetailMapper
 import com.zubayr.service.control.repository.DetailRepository
 import com.zubayr.service.control.repository.EmployeeRepository
 import com.zubayr.service.control.repository.InfoOperationRepository
 import com.zubayr.service.control.repository.OperationRepository
-import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.ZonedDateTime
 
 /**
  * InfoService
@@ -29,19 +27,27 @@ class InfoService(
     @Transactional
     fun add(infoDto: SetupOperationDto) {
 
-        val details = detailRepository.getTopByProductIdAndCipherAndStage(
-                infoDto.countDetails, infoDto.productId, infoDto.detailCipher, StageStatusEnum.NOT_DONE
-        )
+        val details = detailRepository.getByProductIdAndCipherAndStage(
+                infoDto.productId, infoDto.detailCipher, StageStatusEnum.NOT_DONE.ordinal
+        ).take(infoDto.countDetails)
 
         details.forEach { detail ->
             infoDto.employeeWithOperation
                     .forEach { (employeeId, operationId) ->
                         val employee = employeeRepository.getById(employeeId)
                         val operation = operationRepository.getById(operationId)
-                        val info = infoOperationRepository.save(InfoOperation(operation, StageStatusEnum.NOT_DONE, employee, detail))
+                        val info = infoOperationRepository.save(
+                                InfoOperation(
+                                        operation = operation,
+                                        stage = StageStatusEnum.NOT_DONE,
+                                        employee = employee,
+                                        detail = detail,
+                                        startTime = ZonedDateTime.now())
+                        )
                         detail.stage = StageStatusEnum.IN_WORK
-                        detail.infoOperations?.add(info) ?: mutableListOf(info)
-                        employee.infoOperations?.add(info) ?: mutableListOf(info)
+                        detail.startTime = ZonedDateTime.now()
+                        detail.infoOperations?.add(info)
+                        employee.infoOperations?.add(info)
                         employeeRepository.save(employee)
                     }
         }

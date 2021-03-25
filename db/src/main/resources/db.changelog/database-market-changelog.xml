@@ -57,9 +57,9 @@
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
+            <column name="product_id" type="uuid"/>
             <column name="name" type="VARCHAR"/>
             <column name="cipher" type="VARCHAR"/>
-            <column name="product_id" type="uuid"/>
             <column name="route" type="VARCHAR"/>
             <column name="stage" type="INTEGER"/>
             <column name="material" type="VARCHAR"/>
@@ -83,9 +83,9 @@
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
+            <column name="plan_id" type="uuid"/>
             <column name="name" type="VARCHAR"/>
             <column name="cipher" type="VARCHAR"/>
-            <column name="plan_id" type="uuid"/>
             <column name="start_date" type="DATE"/>
             <column name="end_date" type="DATE"/>
             <column name="real_end_date" type="DATE"/>
@@ -108,13 +108,13 @@
             <column name="name" type="INTEGER"/> <!--ENUM-->
             <column name="serial_number" type="INT"/>
             <column name="serial_number_by_operation" type="INT"/>
-            <column name="detail_cipher" type="uuid"/>
+            <column name="detail_cipher" type="VARCHAR"/>
             <column name="time_in_hours" type="NUMERIC(19,6)"/>
-            <column name="start_date" type="DATE"/>
-            <column name="end_date" type="DATE"/>
+            <column name="start_time" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="end_time" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="is_deleted" type="BOOLEAN"/>
             <column name="real_end_date" type="DATE"/>
             <column name="created_date" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="is_deleted" type="BOOLEAN"/>
             <column name="last_modified_date" type="TIMESTAMP WITH TIME ZONE"/>
         </createTable>
     </changeSet>
@@ -129,14 +129,14 @@
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="operation" type="uuid"/>
-            <column name="stage" type="INTEGER"/> <!--ENUM-->
+            <column name="detail_id" type="uuid"/>
+            <column name="operation_id" type="uuid"/>
             <column name="employee_id" type="uuid"/>
-            <column name="start_date" type="DATE"/>
-            <column name="end_date" type="DATE"/>
-            <column name="real_end_date" type="DATE"/>
-            <column name="created_date" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="stage" type="INTEGER"/> <!--ENUM-->
+            <column name="start_time" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="end_time" type="TIMESTAMP WITH TIME ZONE"/>
             <column name="is_deleted" type="BOOLEAN"/>
+            <column name="created_date" type="TIMESTAMP WITH TIME ZONE"/>
             <column name="last_modified_date" type="TIMESTAMP WITH TIME ZONE"/>
         </createTable>
     </changeSet>

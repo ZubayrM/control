@@ -7,6 +7,6 @@ data class OperationInfoDto(
         var name: String? = null,
         var serialNumber: Int? = null,
         var serialNumberByOperation: Int? = null,
-        var cipherDetail: UUID? = null,
+        var cipherDetail: String? = null,
         var time_in_hours: BigDecimal? = null
 ) : BaseDto()

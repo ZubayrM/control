@@ -16,14 +16,13 @@ data class Employee (
         var surname: String? = null,
 
         @Column(name = "date_of_birth")
-        //@Temporal(TemporalType.DATE)
         var dataOfBirth: LocalDate? = null,
 
         @Column(name = "profession")
         var profession: ProfessionEnum? = null,
 
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "employee", fetch = FetchType.LAZY)
-        var infoOperations: MutableList<InfoOperation>? = null
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "employee")
+        var infoOperations: MutableList<InfoOperation>? = mutableListOf()
 
 
 ) : BaseEntity()

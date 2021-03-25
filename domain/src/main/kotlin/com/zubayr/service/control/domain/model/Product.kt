@@ -12,7 +12,7 @@ data class Product (
         @Column(name = "cipher")
         var cipher: String? = null,
 
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name ="plan_id")
         val plan: Plan? = null
 
