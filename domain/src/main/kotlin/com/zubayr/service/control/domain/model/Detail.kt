@@ -25,6 +25,9 @@ data class Detail (
         @Column(name = "end_time")
         var endTime: ZonedDateTime? = null,
 
+        @Column(name = "real_end_date")
+        var realEndTime: ZonedDateTime?= null,
+
         @Column(name = "route")
         var route: String? = null,
 

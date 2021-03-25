@@ -2,16 +2,18 @@ package com.zubayr.service.control.service
 
 import com.zubayr.service.control.api.model.PlanDto
 import com.zubayr.service.control.mapper.PlanMapper
-import com.zubayr.service.control.repository.DetailRepository
+import com.zubayr.service.control.parser.XLSXParser
 import com.zubayr.service.control.repository.PlanRepository
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 import java.time.LocalDate
 import java.util.*
 
 @Service
 class PlanService(
-        private val planRepository: PlanRepository
+        private val planRepository: PlanRepository,
+        private val parser: XLSXParser
 ) {
 
     private val planMapper: PlanMapper = Mappers.getMapper(PlanMapper::class.java)
@@ -32,5 +34,10 @@ class PlanService(
 
     fun delete(id: UUID): PlanDto {
         TODO("Not yet implemented")
+    }
+
+    fun downloadPlanFile(file: MultipartFile): Boolean {
+        println(parser.parse(file))
+        return true
     }
 }

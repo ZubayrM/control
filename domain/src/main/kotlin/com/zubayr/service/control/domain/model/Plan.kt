@@ -21,7 +21,7 @@ data class Plan(
         //@Temporal(TemporalType.DATE)
     var realEndDate: LocalDate? = null,
 
-    @OneToMany(mappedBy = "plan")
+    @OneToMany(mappedBy = "plan", fetch = FetchType.EAGER)
     var products: List<Product> = listOf()
 
 ): BaseEntity()

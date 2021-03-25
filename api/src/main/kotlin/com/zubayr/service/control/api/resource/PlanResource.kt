@@ -3,6 +3,7 @@ package com.zubayr.service.control.api.resource
 import com.zubayr.service.control.api.model.PlanDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @RequestMapping("/plan")
@@ -25,5 +26,8 @@ interface PlanResource {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID): ResponseEntity<PlanDto>
+
+    @PostMapping("/download")
+    fun downloadPlanFile(@RequestParam file: MultipartFile): ResponseEntity<Boolean>
 
 }

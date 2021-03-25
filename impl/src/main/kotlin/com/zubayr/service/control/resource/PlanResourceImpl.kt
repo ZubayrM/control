@@ -6,6 +6,7 @@ import com.zubayr.service.control.service.PlanService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -28,4 +29,6 @@ class PlanResourceImpl(
     override fun delete(id: UUID): ResponseEntity<PlanDto> {
         TODO("Not yet implemented")
     }
+
+    override fun downloadPlanFile(file: MultipartFile): ResponseEntity<Boolean> = ResponseEntity.ok().body(planService.downloadPlanFile(file))
 }
