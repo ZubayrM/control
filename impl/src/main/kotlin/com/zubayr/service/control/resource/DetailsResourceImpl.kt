@@ -2,6 +2,7 @@ package com.zubayr.service.control.resource
 
 import com.zubayr.service.control.api.model.DetailDto
 import com.zubayr.service.control.api.model.DetailsStatusDto
+import com.zubayr.service.control.api.model.detail.ByProductDetailDto
 import com.zubayr.service.control.api.resource.DetailsResource
 import com.zubayr.service.control.service.DetailService
 import org.springframework.http.ResponseEntity
@@ -17,7 +18,7 @@ class DetailsResourceImpl(
 
     override fun getById(id: UUID) = ResponseEntity.ok(detailService.getById(id))
 
-    override fun getAllByProductId(id: UUID) = ResponseEntity.ok(detailService.getAllByProductId(id))
+    override fun getAllByProductId(id: UUID): ResponseEntity<List<ByProductDetailDto>> = ResponseEntity.ok(detailService.getAllByProductId(id))
 
     override fun getStatusByProductId(id: UUID): ResponseEntity<DetailsStatusDto> {
         return ResponseEntity.ok(detailService.getStatusByProductId(id))

@@ -2,6 +2,7 @@ package com.zubayr.service.control.api.resource
 
 import com.zubayr.service.control.api.model.DetailDto
 import com.zubayr.service.control.api.model.DetailsStatusDto
+import com.zubayr.service.control.api.model.detail.ByProductDetailDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,7 +16,7 @@ interface DetailsResource {
     fun getById(@PathVariable id:UUID): ResponseEntity<DetailDto>
 
     @GetMapping("/product/{id}")
-    fun getAllByProductId(@PathVariable id:UUID): ResponseEntity<List<DetailDto>>
+    fun getAllByProductId(@PathVariable id:UUID): ResponseEntity<List<ByProductDetailDto>>
 
     @GetMapping("/productStatus/{id}")
     fun getStatusByProductId(@PathVariable id:UUID): ResponseEntity<DetailsStatusDto>
