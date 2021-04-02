@@ -27,13 +27,14 @@ class DetailService(
         var list: ArrayList<ByProductDetailDto> = ArrayList()
         detailRepository.getAllByProductId(id).groupBy { d-> d.cipher }.forEach { (c, l) ->
             run {
+                val details = l.groupBy { d -> d.stage }
                 list
                     .add(ByProductDetailDto(
                         name = l[0].name,
                         cipher = c,
-                        sizeNotDone= l.groupBy { d-> {d.stage}}[{ StageStatusEnum.NOT_DONE }]?.size,
-                        sizeInWork = l.groupBy { d-> {d.stage}}[{ StageStatusEnum.IN_WORK }]?.size,
-                        sizeCompleted = l.groupBy { d->{d.stage}}[{StageStatusEnum.COMPLETED}]?.size
+                        sizeNotDone=Optional.ofNullable(details[StageStatusEnum.NOT_DONE]?.size).orElse(0),
+                        sizeInWork = Optional.ofNullable(details[StageStatusEnum.IN_WORK]?.size).orElse(0),
+                        sizeCompleted = Optional.ofNullable(details[StageStatusEnum.COMPLETED]?.size).orElse(0)
                     ))
             }
         }
