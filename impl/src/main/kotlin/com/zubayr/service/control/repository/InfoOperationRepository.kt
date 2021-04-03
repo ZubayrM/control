@@ -7,4 +7,5 @@ import java.util.*
 
 @Repository
 interface InfoOperationRepository: PagingAndSortingRepository<InfoOperation, UUID> {
+
 }

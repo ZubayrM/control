@@ -1,12 +1,10 @@
 package com.zubayr.service.control.service
 
-import com.zubayr.service.control.api.model.DetailDto
 import com.zubayr.service.control.api.model.DetailsStatusDto
 import com.zubayr.service.control.api.model.detail.ByProductDetailDto
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import com.zubayr.service.control.mapper.DetailMapper
 import com.zubayr.service.control.repository.DetailRepository
-import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
 import kotlin.collections.ArrayList

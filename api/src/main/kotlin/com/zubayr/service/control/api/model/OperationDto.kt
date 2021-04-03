@@ -3,7 +3,7 @@ package com.zubayr.service.control.api.model
 import java.math.BigDecimal
 import java.util.*
 
-data class OperationInfoDto(
+data class OperationDto(
         var name: String? = null,
         var serialNumber: Int? = null,
         var serialNumberByOperation: Int? = null,

@@ -12,5 +12,6 @@ data class SetupOperationDto(
         var detailCipher: String,
         var countDetails: Int,
         var productId: UUID,
-        var employeeWithOperation: HashMap<UUID,UUID>
+        var employeeId: UUID,
+        var operationId: UUID
 )

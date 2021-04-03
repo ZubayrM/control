@@ -25,31 +25,29 @@ class InfoService(
 ) {
 
     @Transactional
-    fun add(infoDto: SetupOperationDto) {
+    fun add(operationDto: SetupOperationDto) {
 
         val details = detailRepository.getByProductIdAndCipherAndStage(
-                infoDto.productId, infoDto.detailCipher, StageStatusEnum.NOT_DONE.ordinal
-        ).take(infoDto.countDetails)
+                operationDto.productId, operationDto.detailCipher, StageStatusEnum.NOT_DONE.ordinal
+        ).take(operationDto.countDetails)
 
         details.forEach { detail ->
-            infoDto.employeeWithOperation
-                    .forEach { (employeeId, operationId) ->
-                        val employee = employeeRepository.getById(employeeId)
-                        val operation = operationRepository.getById(operationId)
-                        val info = infoOperationRepository.save(
-                                InfoOperation(
-                                        operation = operation,
-                                        stage = StageStatusEnum.NOT_DONE,
-                                        employee = employee,
-                                        detail = detail,
-                                        startTime = ZonedDateTime.now())
-                        )
-                        detail.stage = StageStatusEnum.IN_WORK
-                        detail.startTime = ZonedDateTime.now()
-                        detail.infoOperations?.add(info)
-                        employee.infoOperations?.add(info)
-                        employeeRepository.save(employee)
-                    }
+            val employee = employeeRepository.getById(operationDto.employeeId)
+            val operation = operationRepository.getById(operationDto.operationId)
+            val info = infoOperationRepository.save(
+                    InfoOperation(
+                            operation = operation,
+                            stage = StageStatusEnum.NOT_DONE,
+                            employee = employee,
+                            detail = detail,
+                            startTime = ZonedDateTime.now())
+            )
+            detail.stage = StageStatusEnum.IN_WORK
+            detail.startTime = ZonedDateTime.now()
+            detail.infoOperations?.add(info)
+            employee.infoOperations?.add(info)
+            employeeRepository.save(employee)
+
         }
         detailRepository.saveAll(details)
     }

@@ -9,24 +9,7 @@ import java.util.*
 @RequestMapping("/employee")
 interface EmployeeResource{
 
-    @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<EmployeeDto>
+    @GetMapping("/operation/{id}")
+    fun getByOperationId(@PathVariable id: UUID): ResponseEntity<List<EmployeeDto>>
 
-    @GetMapping
-    fun getByName(@RequestParam name: String): ResponseEntity<List<EmployeeDto>>
-
-    @GetMapping("/detail/{id}")
-    fun getByDetail(@PathVariable id: UUID): ResponseEntity<EmployeeDto>//----------?
-
-    @PostMapping
-    fun add(@RequestBody dto: EmployeeDto): ResponseEntity<EmployeeDto>
-
-    @PostMapping("/addAll")
-    fun addAll(@RequestParam file: MultipartFile): ResponseEntity<List<EmployeeDto>>
-
-    @PutMapping
-    fun put(@RequestBody dto: EmployeeDto): ResponseEntity<EmployeeDto>
-
-    @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: UUID): ResponseEntity<Boolean>
 }
