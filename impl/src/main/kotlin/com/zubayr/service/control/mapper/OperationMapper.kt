@@ -10,9 +10,6 @@ import org.mapstruct.ReportingPolicy
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 abstract class OperationMapper : BaseMapper<Operation, OperationDto>{
 
-    @Mappings(
-            Mapping(target = "id", ignore = true)
-    )
     abstract override fun convertToDto(entity: Operation): OperationDto
 
     abstract override fun convertToEntity(dto: OperationDto): Operation

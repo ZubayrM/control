@@ -24,6 +24,9 @@ data class Operation (
         var time_in_hours: BigDecimal? = null,
 
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "operation")
-        var infoOperations: MutableList<InfoOperation>? = mutableListOf()
+        var infoOperations: MutableList<InfoOperation>? = mutableListOf(),
+
+        @ManyToMany(mappedBy = "operations")
+        var employees: MutableSet<Employee> = mutableSetOf()
 
 ) : BaseEntity()

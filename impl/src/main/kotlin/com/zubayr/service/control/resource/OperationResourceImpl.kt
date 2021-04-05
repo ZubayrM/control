@@ -14,8 +14,11 @@ class OperationResourceImpl(
 
 ) : OperationResource {
 
-
     override fun getOperationByDetailId(cipher: String): ResponseEntity<List<OperationDto>> {
         return ResponseEntity.ok(operationService.getOperationByDetailCipher(cipher))
+    }
+
+    override fun addOperation(operationDto: OperationDto) {
+        operationService.add(operationDto)
     }
 }

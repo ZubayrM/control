@@ -13,8 +13,8 @@ spring:
       maximum-pool-size: 15
 
   liquibase:
-    enabled: false
-    drop-first: false
+    enabled: true
+    drop-first: true
     change-log: classpath:db.changelog/database-market-changelog.xml
 
   jpa:

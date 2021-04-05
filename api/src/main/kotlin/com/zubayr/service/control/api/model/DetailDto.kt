@@ -16,6 +16,8 @@ enum class StageDetailEnumDto {
 
     IN_WORK,
 
-    COMPLETED
+    COMPLETED,
+
+    BROKEN
 }
 

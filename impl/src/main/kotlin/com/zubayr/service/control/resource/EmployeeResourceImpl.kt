@@ -1,6 +1,7 @@
 package com.zubayr.service.control.resource
 
 import com.zubayr.service.control.api.model.EmployeeDto
+import com.zubayr.service.control.api.model.OperationDto
 import com.zubayr.service.control.api.resource.EmployeeResource
 import com.zubayr.service.control.service.EmployeeService
 import org.springframework.http.ResponseEntity
@@ -16,5 +17,13 @@ class EmployeeResourceImpl(
 
     override fun getByOperationId(id: UUID): ResponseEntity<List<EmployeeDto>> {
         return ResponseEntity.ok(employeeService.getEmployeesByOperationId(id))
+    }
+
+    override fun addEmployee(employeeDto: EmployeeDto) {
+        employeeService.add(employeeDto)
+    }
+
+    override fun addOperation(employee_id: UUID, operations: List<UUID>) {
+        employeeService.addOperations(employee_id, operations)
     }
 }

@@ -141,4 +141,20 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="7" author="Denis_Kholmogorov">
+        <preConditions onFail="MARK_RAN" onError="CONTINUE">
+            <not>
+                <tableExists tableName="employee_operation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="employee_operation">
+            <column name="employee_id" type="uuid">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="operation_id" type="uuid">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

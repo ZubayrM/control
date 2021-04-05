@@ -2,12 +2,11 @@ package com.zubayr.service.control.domain.model
 
 import com.zubayr.service.control.domain.model.Enum.ProfessionEnum
 import java.time.LocalDate
-import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "employee")
-data class Employee (
+data class Employee(
 
         @Column(name = "name")
         var name: String? = null,
@@ -22,7 +21,24 @@ data class Employee (
         var profession: ProfessionEnum? = null,
 
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "employee")
-        var infoOperations: MutableList<InfoOperation>? = mutableListOf()
+        var infoOperations: MutableList<InfoOperation>? = mutableListOf(),
 
+        @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+        @JoinTable(name = "employee_operation",
+                joinColumns = [JoinColumn(name = "employee_id")],
+                inverseJoinColumns = [JoinColumn(name = "operation_id")]
+        )
+        var operations: MutableSet<Operation> = mutableSetOf()
 
-) : BaseEntity()
+) : BaseEntity() {
+
+    fun addOperation(operation: Operation) {
+        operations.add(operation)
+        operation.employees.add(this)
+    }
+
+    fun deleteOperation(operation: Operation){
+        operations.remove(operation)
+        operation.employees.remove(this)
+    }
+}

@@ -5,6 +5,7 @@ import com.zubayr.service.control.api.model.detail.ByProductDetailDto
 import com.zubayr.service.control.domain.model.Enum.StageStatusEnum
 import com.zubayr.service.control.mapper.DetailMapper
 import com.zubayr.service.control.repository.DetailRepository
+import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
 import kotlin.collections.ArrayList
@@ -22,7 +23,7 @@ class DetailService(
 //            .map { detailMapper.convertToDto(it) }
 
     fun getAllByProductId(id: UUID): ArrayList<ByProductDetailDto> {
-        var list: ArrayList<ByProductDetailDto> = ArrayList()
+        val list: ArrayList<ByProductDetailDto> = ArrayList()
         detailRepository.getAllByProductId(id).groupBy { d-> d.cipher }.forEach { (c, l) ->
             run {
                 val details = l.groupBy { d -> d.stage }

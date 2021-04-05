@@ -6,5 +6,7 @@ enum class StageStatusEnum {
 
     IN_WORK,
 
-    COMPLETED
+    COMPLETED,
+
+    BROKEN
 }
