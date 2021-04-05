@@ -26,7 +26,7 @@ data class Operation (
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "operation")
         var infoOperations: MutableList<InfoOperation>? = mutableListOf(),
 
-        @ManyToMany(mappedBy = "operations")
+        @ManyToMany(mappedBy = "operations", fetch = FetchType.EAGER)
         var employees: MutableSet<Employee> = mutableSetOf()
 
 ) : BaseEntity()

@@ -108,7 +108,7 @@
             <column name="name" type="INTEGER"/> <!--ENUM-->
             <column name="serial_number" type="INT"/>
             <column name="serial_number_by_operation" type="INT"/>
-            <column name="detail_cipher" type="VARCHAR"/>
+            <column name="cipher_detail" type="VARCHAR"/>
             <column name="time_in_hours" type="NUMERIC(19,6)"/>
             <column name="start_time" type="TIMESTAMP WITH TIME ZONE"/>
             <column name="end_time" type="TIMESTAMP WITH TIME ZONE"/>
