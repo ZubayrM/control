@@ -10,10 +10,13 @@ import java.util.*
 @RequestMapping("/operation")
 interface OperationResource {
 
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id:UUID): ResponseEntity<OperationDto?>
+
     @GetMapping("/detail")
     fun getOperationByDetailId(@RequestParam(name = "cipher") cipher:String): ResponseEntity<List<OperationDto>>
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun addOperation(operationDto: OperationDto)
+    fun addOperation(@RequestBody operationDto: OperationDto)
 }

@@ -6,6 +6,7 @@ import com.zubayr.service.control.api.resource.EmployeeResource
 import com.zubayr.service.control.service.EmployeeService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
@@ -25,5 +26,9 @@ class EmployeeResourceImpl(
 
     override fun addOperation(employee_id: UUID, operations: List<UUID>) {
         employeeService.addOperations(employee_id, operations)
+    }
+
+    override fun deleteOperation(employee_id: UUID, operations: List<UUID>) {
+        employeeService.deleteOperations(employee_id, operations)
     }
 }

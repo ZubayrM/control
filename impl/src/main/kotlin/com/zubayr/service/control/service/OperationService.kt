@@ -1,5 +1,6 @@
 package com.zubayr.service.control.service
 
+import com.zubayr.service.control.api.model.EmployeeDto
 import com.zubayr.service.control.api.model.OperationDto
 import com.zubayr.service.control.domain.model.Operation
 import com.zubayr.service.control.mapper.OperationMapper
@@ -25,6 +26,10 @@ class OperationService(
     }
 
     fun getAllOperations(operations: List<UUID>): List<Operation> {
-        return operations.mapNotNull { operationRepository.getById(it) }
+        return operations.map { operationRepository.getById(it) }
+    }
+
+    fun getById(id: UUID): OperationDto {
+        return operationRepository.getById(id).let { operationMapper.convertToDto(it) }
     }
 }

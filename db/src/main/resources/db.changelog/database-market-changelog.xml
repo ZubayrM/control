@@ -105,7 +105,7 @@
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="name" type="INTEGER"/> <!--ENUM-->
+            <column name="name" type="VARCHAR"/>
             <column name="serial_number" type="INT"/>
             <column name="serial_number_by_operation" type="INT"/>
             <column name="cipher_detail" type="VARCHAR"/>
@@ -148,12 +148,8 @@
             </not>
         </preConditions>
         <createTable tableName="employee_operation">
-            <column name="employee_id" type="uuid">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="operation_id" type="uuid">
-                <constraints nullable="false" unique="true"/>
-            </column>
+            <column name="employee_id" type="uuid"/>
+            <column name="operation_id" type="uuid"/>
         </createTable>
     </changeSet>
 

@@ -29,4 +29,13 @@ data class Operation (
         @ManyToMany(mappedBy = "operations", fetch = FetchType.EAGER)
         var employees: MutableSet<Employee> = mutableSetOf()
 
-) : BaseEntity()
+) : BaseEntity(){
+
+        override fun equals(other: Any?): Boolean {
+                return super.equals(other)
+        }
+
+        override fun hashCode(): Int {
+                return super.hashCode()
+        }
+}

@@ -17,12 +17,8 @@ class EmployeeService(
 ) {
 
     private val employeeMapper = Mappers.getMapper(EmployeeMapper::class.java)
-    private val operationMapper = Mappers.getMapper(OperationMapper::class.java)
 
-    fun getEmployeesByOperationId(id: UUID): List<EmployeeDto> {
-        //TODO employeeRepository.
-        return emptyList()
-    }
+
 
     fun add(employeeDto: EmployeeDto) {
         employeeRepository.save(employeeMapper.convertToEntity(employeeDto))
@@ -35,5 +31,18 @@ class EmployeeService(
             operationService
                     .getAllOperations(operations).forEach { operation -> employee.addOperation(operation) }
         }
+    }
+
+    @Transactional
+    fun deleteOperations(employeeId: UUID, operations: List<UUID>) {
+        employeeRepository.getById(employeeId = employeeId)
+                .let { employee ->
+                    operationService
+                            .getAllOperations(operations).forEach { operation -> employee.deleteOperation(operation) }
+                }
+    }
+
+    fun getEmployeesByOperationId(id: UUID): List<EmployeeDto> {
+        return operationService.getById(id)?.employees?.toList() ?: emptyList()
     }
 }

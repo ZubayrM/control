@@ -8,7 +8,7 @@ import java.util.*
 @Repository
 interface OperationRepository : PagingAndSortingRepository<Operation, UUID> {
 
-    fun getById(operationId: UUID): Operation?
+    fun getById(operationId: UUID): Operation
 
     fun getAllByCipherDetail(cipher: String): List<Operation>
 }
