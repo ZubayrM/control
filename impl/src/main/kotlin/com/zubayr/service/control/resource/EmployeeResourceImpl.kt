@@ -31,4 +31,8 @@ class EmployeeResourceImpl(
     override fun deleteOperation(employee_id: UUID, operations: List<UUID>) {
         employeeService.deleteOperations(employee_id, operations)
     }
+
+    override fun addListEmployees(file: MultipartFile) {
+        employeeService.addAll(file)
+    }
 }

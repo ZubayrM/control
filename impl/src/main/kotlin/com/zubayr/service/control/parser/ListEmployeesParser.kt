@@ -10,10 +10,10 @@ import org.springframework.web.multipart.MultipartFile
 @Component
 class ListEmployeesParser(
         private val employeeRepository: EmployeeRepository
-) {
-    private
+)
+{
 
-    fun  parse(file: MultipartFile): List<Employee>{
+    fun parse(file: MultipartFile): List<Employee>{
         val workbook = XSSFWorkbook(file.inputStream)
         return employeeRepository.saveAll(parseWorkbook(workbook)).toList()
 
@@ -24,11 +24,21 @@ class ListEmployeesParser(
         val sheet = workbook.getSheetAt(0)
 
         for (row in sheet){
-            val cell2 = row.getCell(2)
+            val cell2 = row.getCell(3)
 
-            val list = cell2.toString().split(" ")
-            if (list.size == 3){
-                listEmployee.add(Employee(name = list[2], surname = list[1], profession = ProfessionEnum.OPERATOR))
+            if (cell2 != null && cell2.toString() != ""){
+                val list:List<String>? = cell2.toString().split(" ")
+                if (list != null){
+
+                    var professionEnum: ProfessionEnum? = null
+                    if(list[0].length%2 == 0){
+                        professionEnum = ProfessionEnum.MILLING
+                    } else professionEnum = ProfessionEnum.TURNER
+
+                    if (list.size == 3){
+                        listEmployee.add(Employee(name = list[1], surname = list[0], profession = professionEnum))
+                    }
+                }
             }
         }
         return listEmployee

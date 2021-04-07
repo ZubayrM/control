@@ -26,4 +26,7 @@ interface EmployeeResource{
     @DeleteMapping("{employee_id}/operation",produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun deleteOperation(@PathVariable employee_id: UUID, @RequestBody operations: List<UUID>)
+
+    @PostMapping("/addAll")
+    fun addListEmployees(@RequestParam file: MultipartFile)
 }
